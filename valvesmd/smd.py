@@ -11,8 +11,16 @@ from collections import OrderedDict
 standard_library.install_aliases()
 
 
-def smd_str_num(number):
-    return ''
+def str_num(number, decimals=8, force=False):
+    if force:
+        f = "{0:."+str(decimals)+"f}"
+        ret = f.format(number)
+    else:
+        if number % 1:
+            ret = str(number)
+        else:
+            ret = str(int(number))
+    return ret
 
 
 class Smd(object):
@@ -74,9 +82,9 @@ class SmdBonePose(object):
     def smd_str(self):
         key_str = str(self.boneid) + ' '
         for c in self.position:
-            key_str += str(c) + ' '
+            key_str += str_num(c, 6) + ' '
         for c in self.rotation:
-            key_str += str(c) + ' '
+            key_str += str_num(c, 6) + ' '
         return key_str.strip()
 
 
@@ -108,9 +116,9 @@ class SmdVert(object):
     def smd_str(self):
         vert_str = str(self.parent_boneid) + ' '
         for c in self.position:
-            vert_str += str(c) + ' '
+            vert_str += str_num(c, 8, True) + ' '
         for c in self.normal:
-            vert_str += str(c) + ' '
+            vert_str += str_num(c, 6) + ' '
         for c in self.uv:
-            vert_str += str(c) + ' '
+            vert_str += str_num(c, 6) + ' '
         return vert_str.strip()

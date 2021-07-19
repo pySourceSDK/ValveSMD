@@ -5,5 +5,5 @@ from __future__ import absolute_import
 from future import standard_library
 standard_library.install_aliases()
 from valvesmd.smd import *
-from valvesmd.parser import SmdParse
+from valvesmd.parser import SmdParse, SmdSyntaxError
 from valvesmd.writer import SmdWrite

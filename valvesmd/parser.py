@@ -97,6 +97,10 @@ pp_smd = pp_version + Optional(pp_nodes) + Optional(pp_skeleton) + \
 pp_smd.setParseAction(lambda s: Smd(s.asDict()))
 
 
+class SmdSyntaxError(Exception):
+    pass
+
+
 def SmdParse(filename):
     filepath = os.path.abspath(filename)
     filedir = os.path.dirname(filepath)
@@ -104,13 +108,13 @@ def SmdParse(filename):
     results = []
     try:
         f = open(filename, "r", encoding="iso-8859-1")
-        results = pp_smd.ignore(cStyleComment).parseFile(f)
-        f.close()
+        try:
+            results = pp_smd.ignore(cStyleComment).parseFile(f)
+            f.close()
+        except Exception as e:
+            f.close()
+            raise
     except Exception as e:
         raise
 
-    if len(results):
-        return results[0]
-    else:
-        # parse failure
-        pass
+    return results[0]
