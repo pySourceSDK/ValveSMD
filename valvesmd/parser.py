@@ -32,7 +32,7 @@ pp_version.setResultsName('version')
 
 
 # Triangles
-pp_material = Word(printables)
+pp_material = Word(printables+' ')
 pp_material = pp_material.setResultsName('material')
 
 pp_pbone = pp_int.setResultsName('parent_boneid')
@@ -50,13 +50,20 @@ pp_links = pp_int.setResultsName('links')
 pp_boneid = pp_int.setResultsName('boneid')
 pp_weight = pp_float.setResultsName('weight')
 
-pp_vert = Group(pp_pbone + pp_pos + pp_norm + pp_uv + Optional(pp_links) + Optional(pp_boneid) + Optional(pp_weight))
-pp_vert = pp_vert.setParseAction(lambda v: SmdVert(asDict(v)))
+pp_vert_base = Group(pp_pbone + pp_pos + pp_norm + pp_uv)
+pp_vert_base.setParseAction(lambda v: SmdVert(asDict(v)))
 
-pp_tri = pp_vert + pp_vert + pp_vert
-pp_tri = pp_tri.setResultsName('verts')
+pp_vert_extended = Group(pp_pbone + pp_pos + pp_norm + pp_uv +
+                         Optional(pp_links) + Optional(pp_boneid) + Optional(pp_weight))
+pp_vert_extended.setParseAction(lambda v: SmdVert(asDict(v)))
 
-pp_triangle = Group(pp_material + pp_tri)
+pp_verts_base = pp_vert_base + pp_vert_base + pp_vert_base
+pp_verts_extended = pp_vert_extended + pp_vert_extended + pp_vert_extended
+
+pp_verts = pp_verts_extended ^ pp_verts_base
+pp_verts = pp_verts.setResultsName('verts')
+
+pp_triangle = Group(pp_material + pp_verts)
 pp_triangle.addParseAction(lambda t: SmdTriangle(asDict(t)))
 
 pp_triangles = Suppress('triangles') + ZeroOrMore(pp_triangle) + Suppress('end')

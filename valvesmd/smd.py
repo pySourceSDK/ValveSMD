@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from builtins import round
 from builtins import int
 from builtins import next
 from builtins import str
@@ -9,18 +10,6 @@ from builtins import object
 from future import standard_library
 from collections import OrderedDict
 standard_library.install_aliases()
-
-
-def str_num(number, decimals=8, force=False):
-    if force:
-        f = "{0:."+str(decimals)+"f}"
-        ret = f.format(number)
-    else:
-        if number % 1:
-            ret = str(number)
-        else:
-            ret = str(int(number))
-    return ret
 
 
 class Smd(object):
@@ -32,7 +21,7 @@ class Smd(object):
         self.triangles = data.get('triangles', [])
 
     def smd_str(self):
-        ret_str = 'version ' + str(self.version) + '\n'
+        ret_str = 'version ' + str_int(self.version) + '\n'
         ret_str += 'nodes\n'
         for node in self.nodes:
             ret_str += node.smd_str() + '\n'
@@ -55,9 +44,9 @@ class SmdNode(object):
         self.parent_id = data.get('parent_id', -1)
 
     def smd_str(self):
-        node_str = str(self.id)
+        node_str = str_int(self.id)
         node_str += ' "' + self.name + '" '
-        node_str += str(self.parent_id)
+        node_str += str_int(self.parent_id)
         return node_str
 
 
@@ -67,7 +56,7 @@ class SmdKeyframe(object):
         self.poses = data.get('poses', [])
 
     def smd_str(self):
-        key_str = 'time ' + str(self.frame) + '\n'
+        key_str = 'time ' + str_int(self.frame) + '\n'
         for p in self.poses:
             key_str += p.smd_str() + '\n'
         return key_str.strip()
@@ -80,11 +69,11 @@ class SmdBonePose(object):
         self.rotation = data.get('rotation', (0, 0, 0))
 
     def smd_str(self):
-        key_str = str(self.boneid) + ' '
+        key_str = str_int(self.boneid) + ' '
         for c in self.position:
-            key_str += str_num(c, 6) + ' '
+            key_str += str_float(c, 6) + ' '
         for c in self.rotation:
-            key_str += str_num(c, 6) + ' '
+            key_str += str_float(c, 6) + ' '
         return key_str.strip()
 
 
@@ -108,17 +97,35 @@ class SmdVert(object):
         self.normal = data.get('normal', (None, None, None))
         self.uv = data.get('uv', (None, None))
 
-        # optional?
-        self.links = None  # int
-        self.boneid = None  # int
-        self.weight = None  # float
+        self.links = data.get('links', None)
+        self.boneid = data.get('boneid', None)
+        self.weight = data.get('weight', None)
 
     def smd_str(self):
-        vert_str = str(self.parent_boneid) + ' '
+        vert_str = str_int(self.parent_boneid) + ' '
         for c in self.position:
-            vert_str += str_num(c, 8, True) + ' '
+            vert_str += str_float(c, 8, True) + ' '
         for c in self.normal:
-            vert_str += str_num(c, 6) + ' '
+            vert_str += str_float(c, 8) + ' '
         for c in self.uv:
-            vert_str += str_num(c, 6) + ' '
+            vert_str += str_float(c, 8) + ' '
+        if self.links is not None:
+            vert_str += str_int(self.links) + ' '
+        if self.boneid is not None:
+            vert_str += str_int(self.boneid) + ' '
+        if self.weight is not None:
+            vert_str += str_float(self.weight, 8, True) + ' '
         return vert_str.strip()
+
+
+def str_int(number):
+    return str(int(number))
+
+
+def str_float(number, decimals=8, force=False):
+    if force:
+        return ("{0:."+str(decimals)+"f}").format(number)
+    elif number % 1:
+        return str(round(number, decimals))
+    else:
+        return str_int(number)

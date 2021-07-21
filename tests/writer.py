@@ -15,7 +15,6 @@ class SmdWriteTestCase(unittest.TestCase):
         return
 
     def testWriteSmd(self):
-
         SmdWrite(self.smd, self.smd_file)
         with open(self.smd_file, 'r') as file:
             text_result = file.read()

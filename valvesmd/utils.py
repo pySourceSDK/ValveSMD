@@ -12,31 +12,33 @@ import numbers
 AXIS = ['x', 'y', 'z']
 
 
-def _cardinal(n):
-    return int((n != 0) * math.copysign(1, n))
-
-
-def mirrorSmd(smd, axis='x'):
+def SmdMirror(smd, axis='x'):
     try:
         axis = AXIS.index(axis)
     except:
-        raise
+        raise ValueError(
+            "ValueError: Expected mirror axis to be either 'x', 'y' or 'z'")
 
     for vert in [v for t in smd.triangles for v in t.verts]:
         vert.position[axis] = vert.position[axis] * -1
         vert.normal[axis] = vert.normal[axis] * -1
 
+    SmdFlipNormal(smd)
+
+
+def SmdFlipNormal(smd):
     for tri in smd.triangles:
         tri.verts = (tri.verts[2], tri.verts[1], tri.verts[0])
 
 
-def scaleSmd(smd, scale=(1, 1, 1)):
+def SmdScale(smd, scale=(1, 1, 1)):
     if isinstance(scale, numbers.Number):
         scale = (scale, scale, scale)
     elif hasattr(scale, '__len__') and len(scale) == 3:
         scale = tuple(scale)
     else:
-        raise ValueError
+        raise ValueError(
+            "ValueError: Expected scale factor as a tuple (x,y,z)")
 
     for vert in [v for t in smd.triangles for v in t.verts]:
         vert.position = tuple([vert.position[x] * scale[x]
@@ -45,17 +47,25 @@ def scaleSmd(smd, scale=(1, 1, 1)):
                              for x in range(len(AXIS))])
 
 
-def translateSmd(smd, delta=(0, 0, 0)):
-    pass
+def SmdTranslate(smd, delta=(0, 0, 0)):
+    if hasattr(delta, '__len__') and len(delta) == 3:
+        delta = tuple(delta)
+    else:
+        raise ValueError(
+            "ValueError: Expected translation value as a tuple (x,y,z)")
+
+    for vert in [v for t in smd.triangles for v in t.verts]:
+        vert.position = tuple([vert.position[x] + delta[x]
+                               for x in range(len(AXIS))])
 
 
-def cleanSmd(smd):
+def SmdClean(smd):
     unclean_mats = ['TOOLSNODRAW']
     smd.triangles = [t for t in smd.triangles if t.material not in unclean_mats]
     # remove unused nodes
     # remove unused keyframes
 
 
-def matReplaceSmd(smd, original, replacement):
+def SmdMatReplace(smd, original, replacement):
     for triangle in [t for t in smd.triangles if t.material == original]:
         triangle.material = replacement

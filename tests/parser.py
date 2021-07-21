@@ -15,7 +15,10 @@ class SmdParseTestCase(unittest.TestCase):
 
     def testSmd(self):
         smd = SmdParse('tests/smds/stairs001.smd')
-        self.assertTrue(smd)
+        self.assertEqual(len(smd.triangles), 112)
+
+        smd = SmdParse('tests/smds/stairs001_phymodel.smd')
+        self.assertEqual(len(smd.triangles), 24)
 
     def testMissingSmd(self):
         with self.assertRaises(FileNotFoundError):
