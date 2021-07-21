@@ -46,7 +46,11 @@ pp_norm = pp_norm.setResultsName('normal').setParseAction(asTuple)
 pp_uv = Group(pp_float + pp_float)
 pp_uv = pp_uv.setResultsName('uv').setParseAction(asTuple)
 
-pp_vert = Group(pp_pbone + pp_pos + pp_norm + pp_uv)
+pp_links = pp_int.setResultsName('links')
+pp_boneid = pp_int.setResultsName('boneid')
+pp_weight = pp_float.setResultsName('weight')
+
+pp_vert = Group(pp_pbone + pp_pos + pp_norm + pp_uv + Optional(pp_links) + Optional(pp_boneid) + Optional(pp_weight))
 pp_vert = pp_vert.setParseAction(lambda v: SmdVert(asDict(v)))
 
 pp_tri = pp_vert + pp_vert + pp_vert
