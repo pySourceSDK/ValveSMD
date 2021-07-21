@@ -3,7 +3,6 @@ import unittest
 import tempfile
 from valvesmd import *
 from valvesmd.utils import *
-from valvesmd.utils import _cardinal
 
 
 class SmdUtilsTestCase(unittest.TestCase):
@@ -16,36 +15,34 @@ class SmdUtilsTestCase(unittest.TestCase):
     def tearDown(self):
         return
 
-    def testCardinalSmd(self):
-        self.assertEqual(_cardinal(-4.5), -1)
-        self.assertEqual(_cardinal(5), 1)
-        self.assertEqual(_cardinal(0), 0)
-
     def testMirrorSmd(self):
-        mirrorSmd(self.smd, 'x')
-        mirrorSmd(self.smd, 'y')
-        mirrorSmd(self.smd, 'z')
+        SmdMirror(self.smd, 'x')
+        SmdMirror(self.smd, 'y')
+        SmdMirror(self.smd, 'z')
         with self.assertRaises(ValueError):
-            mirrorSmd(self.smd, 'u')
+            SmdMirror(self.smd, 'u')
 
     def testScaleSmd(self):
-        scaleSmd(self.smd)
-        scaleSmd(self.smd, 2)
-        scaleSmd(self.smd, 0.5)
-        scaleSmd(self.smd, (0.5, 2, 1))
+        SmdScale(self.smd)
+        SmdScale(self.smd, 2)
+        SmdScale(self.smd, 0.5)
+        SmdScale(self.smd, (0.5, 2, 1))
+
         with self.assertRaises(ValueError):
-            scaleSmd(self.smd, None)
+            SmdScale(self.smd, None)
 
     def testTranslateSmd(self):
-        translateSmd(self.smd)
+        SmdTranslate(self.smd)
         self.assertTrue(True)
 
+        with self.assertRaises(ValueError):
+            SmdTranslate(self.smd, None)
+
     def testCleanSmd(self):
-        self.assertEqual(len(self.smd.triangles), 112)
-        cleanSmd(self.smd)
+        SmdClean(self.smd)
         self.assertEqual(len(self.smd.triangles), 108)
 
     def testmatReplaceSmd(self):
-        matReplaceSmd(self.smd, 'TOOLSNODRAW', 'WOOD_BRIDGE001')
+        SmdMatReplace(self.smd, 'TOOLSNODRAW', 'WOOD_BRIDGE001')
         for triangle in self.smd.triangles:
             self.assertNotEqual(triangle.material, 'TOOLSNODRAW')

@@ -7,4 +7,4 @@ standard_library.install_aliases()
 from valvesmd.smd import *
 from valvesmd.parser import SmdParse, SmdSyntaxError
 from valvesmd.writer import SmdWrite
-from valvesmd.utils import mirrorSmd, scaleSmd, translateSmd, cleanSmd, matReplaceSmd
+from valvesmd.utils import SmdMirror, SmdScale, SmdTranslate, SmdClean, SmdMatReplace
