@@ -78,7 +78,6 @@ class SmdBonePose(object):
 
 
 class SmdTriangle(object):
-
     def __init__(self, data={}):
         self.material = data.get('material', 'undefined')
         self.verts = data.get('verts', (None, None, None))
@@ -90,16 +89,27 @@ class SmdTriangle(object):
         return tri_str.strip()
 
 
+class SmdLink(object):
+    def __init__(self, data={}):
+        self.boneid = data.get('boneid', None)
+        self.weight = data.get('weight', None)
+
+    def smd_str(self):
+        link_str = ''
+        if self.boneid is not None:
+            link_str += str_int(self.boneid) + ' '
+        if self.weight is not None:
+            link_str += str_float(self.weight, 8, True) + ' '
+        return link_str.strip()
+
+
 class SmdVert(object):
     def __init__(self, data={}):
         self.parent_boneid = data.get('parent_boneid', -1)
         self.position = data.get('position', (None, None, None))
         self.normal = data.get('normal', (None, None, None))
         self.uv = data.get('uv', (None, None))
-
-        self.links = data.get('links', None)
-        self.boneid = data.get('boneid', None)
-        self.weight = data.get('weight', None)
+        self.links = data.get('links', None)  # optional
 
     def smd_str(self):
         vert_str = str_int(self.parent_boneid) + ' '
@@ -110,11 +120,9 @@ class SmdVert(object):
         for c in self.uv:
             vert_str += str_float(c, 8) + ' '
         if self.links is not None:
-            vert_str += str_int(self.links) + ' '
-        if self.boneid is not None:
-            vert_str += str_int(self.boneid) + ' '
-        if self.weight is not None:
-            vert_str += str_float(self.weight, 8, True) + ' '
+            vert_str += str_int(len(self.links)) + ' '
+            for l in self.links:
+                vert_str += l.smd_str() + ' '
         return vert_str.strip()
 
 

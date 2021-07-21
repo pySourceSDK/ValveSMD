@@ -46,15 +46,19 @@ pp_norm = pp_norm.setResultsName('normal').setParseAction(asTuple)
 pp_uv = Group(pp_float + pp_float)
 pp_uv = pp_uv.setResultsName('uv').setParseAction(asTuple)
 
-pp_links = pp_int.setResultsName('links')
 pp_boneid = pp_int.setResultsName('boneid')
 pp_weight = pp_float.setResultsName('weight')
+
+pp_link = Group(pp_boneid + pp_weight)
+pp_link = pp_link.setParseAction(lambda l: SmdLink(asDict(l)))
+
+pp_links = countedArray(pp_link)
+pp_links = pp_links.setResultsName('links').setParseAction(lambda w: w[0])
 
 pp_vert_base = Group(pp_pbone + pp_pos + pp_norm + pp_uv)
 pp_vert_base.setParseAction(lambda v: SmdVert(asDict(v)))
 
-pp_vert_extended = Group(pp_pbone + pp_pos + pp_norm + pp_uv +
-                         Optional(pp_links) + Optional(pp_boneid) + Optional(pp_weight))
+pp_vert_extended = Group(pp_pbone + pp_pos + pp_norm + pp_uv + pp_links)
 pp_vert_extended.setParseAction(lambda v: SmdVert(asDict(v)))
 
 pp_verts_base = pp_vert_base + pp_vert_base + pp_vert_base
