@@ -23,6 +23,10 @@ def SmdMirror(smd, axis='x'):
         vert.position[axis] = vert.position[axis] * -1
         vert.normal[axis] = vert.normal[axis] * -1
 
+    for pose in [p for s in smd.skeleton for p in s.poses]:
+        pose.position[axis] = pose.position[axis] * -1
+        pose.rotation[axis] = pose.rotation[axis] * -1
+
     SmdFlipNormal(smd)
 
 
@@ -46,6 +50,10 @@ def SmdScale(smd, scale=(1, 1, 1)):
         vert.normal = tuple([vert.normal[x] * scale[x]
                              for x in range(len(AXIS))])
 
+    for pose in [p for s in smd.skeleton for p in s.poses]:
+        pose.position = tuple([pose.position[x] * scale[x]
+                               for x in range(len(AXIS))])
+
 
 def SmdTranslate(smd, delta=(0, 0, 0)):
     if hasattr(delta, '__len__') and len(delta) == 3:
@@ -56,6 +64,10 @@ def SmdTranslate(smd, delta=(0, 0, 0)):
 
     for vert in [v for t in smd.triangles for v in t.verts]:
         vert.position = tuple([vert.position[x] + delta[x]
+                               for x in range(len(AXIS))])
+
+    for pose in [p for s in smd.skeleton for p in s.poses]:
+        pose.position = tuple([pose.position[x] + delta[x]
                                for x in range(len(AXIS))])
 
 
