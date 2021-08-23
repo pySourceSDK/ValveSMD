@@ -8,7 +8,7 @@ from builtins import next
 from builtins import str
 from builtins import object
 from future import standard_library
-from collections import OrderedDict
+
 standard_library.install_aliases()
 
 
@@ -19,6 +19,9 @@ class Smd(object):
         self.nodes = data.get('nodes', [])
         self.skeleton = data.get('skeleton', [])
         self.triangles = data.get('triangles', [])
+
+    def __repr__(self):
+        return str(self.__dict__)
 
     def smd_str(self):
         ret_str = 'version ' + str_int(self.version) + '\n'
@@ -38,10 +41,15 @@ class Smd(object):
 
 
 class SmdNode(object):
+
     def __init__(self, data={}):
+
         self.id = data.get('id', -1)
         self.name = data.get('name', 'root')
         self.parent_id = data.get('parent_id', -1)
+
+    def __repr__(self):
+        return str(self.__dict__)
 
     def smd_str(self):
         node_str = str_int(self.id)
@@ -55,6 +63,9 @@ class SmdKeyframe(object):
         self.frame = data.get('frame', 0)
         self.poses = data.get('poses', [])
 
+    def __repr__(self):
+        return str(self.__dict__)
+
     def smd_str(self):
         key_str = 'time ' + str_int(self.frame) + '\n'
         for p in self.poses:
@@ -67,6 +78,9 @@ class SmdBonePose(object):
         self.boneid = data.get('boneid', '-1')
         self.position = data.get('position', (0, 0, 0))
         self.rotation = data.get('rotation', (0, 0, 0))
+
+    def __repr__(self):
+        return str(self.__dict__)
 
     def smd_str(self):
         key_str = str_int(self.boneid) + ' '
@@ -82,6 +96,9 @@ class SmdTriangle(object):
         self.material = data.get('material', 'undefined')
         self.verts = data.get('verts', (None, None, None))
 
+    def __repr__(self):
+        return str(self.__dict__)
+
     def smd_str(self):
         tri_str = self.material + '\n'
         for v in self.verts:
@@ -93,6 +110,9 @@ class SmdLink(object):
     def __init__(self, data={}):
         self.boneid = data.get('boneid', None)
         self.weight = data.get('weight', None)
+
+    def __repr__(self):
+        return str(self.__dict__)
 
     def smd_str(self):
         link_str = ''
@@ -110,6 +130,9 @@ class SmdVert(object):
         self.normal = data.get('normal', (None, None, None))
         self.uv = data.get('uv', (None, None))
         self.links = data.get('links', None)  # optional
+
+    def __repr__(self):
+        return str(self.__dict__)
 
     def smd_str(self):
         vert_str = str_int(self.parent_boneid) + ' '

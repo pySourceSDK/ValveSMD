@@ -2,12 +2,15 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
+from builtins import map
 from builtins import range
 from builtins import int
 from future import standard_library
 standard_library.install_aliases()
 import math
 import numbers
+from operator import mul
+
 
 AXIS = ['x', 'y', 'z']
 
@@ -19,13 +22,17 @@ def SmdMirror(smd, axis='x'):
         raise ValueError(
             "ValueError: Expected mirror axis to be either 'x', 'y' or 'z'")
 
+    transform = (-1 if axis == 'x' else 1,
+                 -1 if axis == 'y' else 1,
+                 -1 if axis == 'z' else 1)
+
     for vert in [v for t in smd.triangles for v in t.verts]:
-        vert.position[axis] = vert.position[axis] * -1
-        vert.normal[axis] = vert.normal[axis] * -1
+        vert.position = tuple(map(mul, vert.position, transform))
+        vert.normal = tuple(map(mul, vert.normal, transform))
 
     for pose in [p for s in smd.skeleton for p in s.poses]:
-        pose.position[axis] = pose.position[axis] * -1
-        pose.rotation[axis] = pose.rotation[axis] * -1
+        pose.position = tuple(map(mul, pose.position, transform))
+        pose.rotation = tuple(map(mul, pose.rotation, transform))
 
     SmdFlipNormal(smd)
 

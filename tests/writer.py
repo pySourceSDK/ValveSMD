@@ -35,3 +35,6 @@ class SmdWriteTestCase(unittest.TestCase):
             original_text = file.read()
 
         self.assertEqual(original_text, self.smds['ref'].smd_str())
+
+    def testRepr(self):
+        self.assertIsInstance(repr(self.smds['ref']), str)
