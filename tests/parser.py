@@ -14,15 +14,15 @@ class SmdParseTestCase(unittest.TestCase):
         return
 
     def testSmd(self):
-        smd = SmdParse('tests/smds/stairs001.smd')
+        smd = Smd('tests/smds/stairs001.smd')
         self.assertEqual(len(smd.triangles), 112)
 
-        smd = SmdParse('tests/smds/stairs001_phymodel.smd')
+        smd = Smd('tests/smds/stairs001_phymodel.smd')
         self.assertEqual(len(smd.triangles), 24)
 
     def testMissingSmd(self):
         with self.assertRaises(FileNotFoundError):
-            smd = SmdParse('tests/smds/stairs002.smd')
+            smd = Smd('tests/smds/stairs002.smd')
 
     def testSyntaxErrorSmd(self):
         f = open(self.smd_file, "w")
@@ -30,4 +30,4 @@ class SmdParseTestCase(unittest.TestCase):
         f.close()
 
         with self.assertRaises(pyparsing.ParseException):
-            smd = SmdParse(self.smd_file)
+            smd = Smd(self.smd_file)

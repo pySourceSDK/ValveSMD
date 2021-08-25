@@ -10,7 +10,7 @@ class SmdParseTypeTestCase(unittest.TestCase):
         return
 
     def testSmdtypes(self):
-        smd = SmdParse('tests/smds/stairs001.smd')
+        smd = Smd('tests/smds/stairs001.smd')
         # Smd
         self.assertIsInstance(smd.version, int)
         self.assertIsInstance(smd.nodes, list)

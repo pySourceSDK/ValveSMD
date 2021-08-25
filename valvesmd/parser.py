@@ -135,7 +135,7 @@ pp_skeleton = pp_skeleton.setParseAction(asList)
 
 
 pp_smd = Group(pp_version + pp_nodes + pp_skeleton + pp_triangles)
-pp_smd.setParseAction(lambda s: Smd(asDict(s[0])))
+pp_smd.setParseAction(lambda s: SmdRoot(asDict(s[0])))
 
 
 class SmdSyntaxError(Exception):
@@ -143,10 +143,8 @@ class SmdSyntaxError(Exception):
 
 
 def SmdParse(filename):
-    filepath = os.path.abspath(filename)
-    filedir = os.path.dirname(filepath)
-
     results = []
+
     try:
         f = open(filename, "r", encoding="iso-8859-1")
         try:
@@ -157,5 +155,4 @@ def SmdParse(filename):
             raise
     except Exception as e:
         raise
-
     return results[0]

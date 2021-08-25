@@ -9,7 +9,7 @@ class SmdUtilsTestCase(unittest.TestCase):
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
         self.smd_file = os.path.join(self.test_dir, 'test.smd')
-        self.smd = SmdParse('tests/smds/stairs001.smd')
+        self.smd = Smd('tests/smds/stairs001.smd')
         return
 
     def tearDown(self):
