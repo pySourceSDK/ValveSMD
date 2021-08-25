@@ -13,4 +13,5 @@ sphinx-autobuild \
     --ignore "*.ilg" \
     --ignore "*.tex" \
     --ignore "*.tex" \
+    --watch "../valvesmd" \
     source build

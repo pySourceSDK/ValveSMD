@@ -1,0 +1,10 @@
+section dl.py.attribute ~ dl.py {
+    margin-top: 10px;
+}
+section dl.py.class ~ dl.py {
+    margin-top: 30px;
+}
+section dl.py.method,
+section dl.py:last-child {
+    margin-bottom: 15px;
+}
