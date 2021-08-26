@@ -24,6 +24,14 @@ Get yourself up and running quickly.
 
    quickstart
 
+API
+---
+
+.. toctree::
+   :maxdepth: 2
+
+   api_ref
+
 Contributing
 ------------
 
