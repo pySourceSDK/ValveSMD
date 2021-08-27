@@ -1,3 +1,4 @@
+import six
 import os
 import tempfile
 import unittest
@@ -26,15 +27,16 @@ class SmdWriteTestCase(unittest.TestCase):
     def testWriteExact(self):
         self.smds['phy'].save(self.smd_temp)
         with open(self.smd_paths['phy'], 'r') as file:
-            original_text = file.read()
-
-        self.assertEqual(original_text, self.smds['phy'].smd_str())
+            original_text = str(file.read())
+        original_text = "\n".join(original_text.splitlines())
+        test_text = "\n".join(self.smds['phy'].smd_str().splitlines())
+        self.assertEqual(test_text, original_text)
 
         self.smds['ref'].save(self.smd_temp)
         with open(self.smd_paths['ref'], 'r') as file:
             original_text = file.read()
-
-        self.assertEqual(original_text, self.smds['ref'].smd_str())
+        test_text = "\n".join(self.smds['ref'].smd_str().splitlines())
+        self.assertEqual(original_text, test_text)
 
     def testRepr(self):
-        self.assertIsInstance(repr(self.smds['ref']), str)
+        self.assertTrue(isinstance(repr(self.smds['ref']), six.string_types))
