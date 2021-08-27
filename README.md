@@ -50,11 +50,11 @@ Parsing can be done by creating an instance of Smd with a path.
 
 ### Utility functions
 
-A few function are provided to perform basic transformations
+A few functions are provided to perform basic transformations.
 
 ```python
 >>> from valvesmd import *
 >>> SmdScale(smd, 2) # 2x scale
->>> SmdMirror(smd, 'x') # 'x', 'y' or 'z'
->>> SmdMatReplace(smd, 'wood', 'metal') # replace a material name
+>>> SmdMirror(smd, 'x') # Mirroring on 'x', 'y' or 'z' axis
+>>> SmdMatReplace(smd, 'wood', 'metal') # replace a material name (without $cdmaterial and extension)
 ```
