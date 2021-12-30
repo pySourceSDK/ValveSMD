@@ -47,10 +47,10 @@ which this class inherits</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="valvesmd.Smd.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvesmd/smd.html#Smd.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvesmd.Smd.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>initalize a pcf file.</p>
+<dd><p>initalize a smd file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The location of the smd file to be parsed</p>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – The location of the smd file to be parsed</p>
 </dd>
 </dl>
 </dd></dl>
@@ -60,7 +60,47 @@ which this class inherits</p>
 <span class="sig-name descname"><span class="pre">source_path</span></span><a class="headerlink" href="#valvesmd.Smd.source_path" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>) - The location of the parsed file</p>
+<dd class="field-odd"><p>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>) - The location of the parsed file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvesmd.Smd.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#valvesmd.Smd.version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvesmd.Smd.nodes">
+<span class="sig-name descname"><span class="pre">nodes</span></span><a class="headerlink" href="#valvesmd.Smd.nodes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference internal" href="classes.html#valvesmd.SmdNode" title="valvesmd.SmdNode">SmdNode</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvesmd.Smd.skeleton">
+<span class="sig-name descname"><span class="pre">skeleton</span></span><a class="headerlink" href="#valvesmd.Smd.skeleton" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference internal" href="classes.html#valvesmd.SmdKeyframe" title="valvesmd.SmdKeyframe">SmdKeyframe</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="valvesmd.Smd.triangles">
+<span class="sig-name descname"><span class="pre">triangles</span></span><a class="headerlink" href="#valvesmd.Smd.triangles" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference internal" href="classes.html#valvesmd.SmdTriangle" title="valvesmd.SmdTriangle">SmdTriangle</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -68,10 +108,10 @@ which this class inherits</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="valvesmd.Smd.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/valvesmd/smd.html#Smd.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#valvesmd.Smd.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves the current instance of the Pcf. Overwrites original pcf file if no destination is provided.</p>
+<dd><p>Saves the current instance of the Smd. Overwrites original smd file if no destination is provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>destination</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – A path (directory + filename) to determine where to save the pcf file.</p>
+<dd class="field-odd"><p><strong>destination</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – A path (directory + filename) to determine where to save the smd file.</p>
 </dd>
 </dl>
 </dd></dl>

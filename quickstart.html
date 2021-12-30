@@ -66,9 +66,11 @@
 <section id="parsing">
 <h3>Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h3>
 <p>Parsing can be done by creating an instance of Smd with a path.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">from</span> <span class="nn">valvesmd</span> <span class="kn">import</span> <span class="n">SmdParse</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">from</span> <span class="nn">valvesmd</span> <span class="kn">import</span> <span class="n">Smd</span><span class="p">,</span> <span class="n">SmdMirror</span>
 
 <span class="o">&gt;</span> <span class="n">smd</span> <span class="o">=</span> <span class="n">Smd</span><span class="p">(</span><span class="s1">&#39;C:/modelsrc/tf/props_forest/rock_005.smd&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">SmdMirror</span><span class="p">(</span><span class="n">smd</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">smd</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>

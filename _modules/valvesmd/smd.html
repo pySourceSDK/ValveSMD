@@ -54,10 +54,10 @@
 
 <div class="viewcode-block" id="Smd.__init__"><a class="viewcode-back" href="../../api/smd.html#valvesmd.Smd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        initalize a pcf file.</span>
+<span class="sd">        initalize a smd file.</span>
 
 <span class="sd">        :param path: The location of the smd file to be parsed</span>
-<span class="sd">        :type path: str</span>
+<span class="sd">        :type path: str, optional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_path</span> <span class="o">=</span> <span class="n">path</span>  <span class="c1">#: :type: (str) - The location of the parsed file</span>
 
@@ -71,9 +71,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">triangles</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">triangles</span></div>
 
 <div class="viewcode-block" id="Smd.save"><a class="viewcode-back" href="../../api/smd.html#valvesmd.Smd.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Saves the current instance of the Pcf. Overwrites original pcf file if no destination is provided.</span>
+        <span class="sd">&quot;&quot;&quot;Saves the current instance of the Smd. Overwrites original smd file if no destination is provided.</span>
 
-<span class="sd">        :param destination: A path (directory + filename) to determine where to save the pcf file.</span>
+<span class="sd">        :param destination: A path (directory + filename) to determine where to save the smd file.</span>
 <span class="sd">        :type destination: str, optional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">SmdWrite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_path</span><span class="p">)</span></div></div>

@@ -43,6 +43,8 @@ Parsing can be done by creating an instance of Smd with a path.
 
 .. code-block:: python
 
-   > from valvesmd import SmdParse
+   > from valvesmd import Smd, SmdMirror
 
    > smd = Smd('C:/modelsrc/tf/props_forest/rock_005.smd')
+   > SmdMirror(smd, 'x')
+   > smd.save()
