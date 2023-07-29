@@ -1,7 +1,9 @@
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/pySourceSDK/ValveSMD/blob/master/LICENSE.txt)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/valvesmd.svg)](https://pypi.python.org/pypi/valvesmd/)
+[![Platforms](https://img.shields.io/badge/platform-Linux,_MacOS,_Windows-blue)]()
 [![PyPI version fury.io](https://badge.fury.io/py/valvesmd.svg)](https://pypi.python.org/pypi/valvesmd/)
-[![alt text](https://github.com/pySourceSDK/ValveSMD/blob/master/docs/source/coverage.svg "coverage")]()
+[![GitHub Workflow Status (with event)](https://github.com/pySourceSDK/ValveSMD/actions/workflows/tests.yml/badge.svg)]()
+[![Test coverage](https://github.com/pySourceSDK/ValveSMD/blob/master/docs/source/coverage.svg "coverage")]()
 
 # ValveSMD
 
@@ -37,7 +39,7 @@ python3 setup.py install
 
 ## Usage
 
-Here's a few example usage of valveSmd
+Here's a few example usage of ValveSMD
 
 ### Parsing
 

@@ -1,14 +1,25 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
+import re
+
+with open('README.md') as f:
+    re_omit = r'<!--- start pypi omit -->.*<!--- end pypi omit -->'
+    long_description = re.sub(re_omit, '', f.read(), flags=re.S)
+
+VERSION = '{{VERSION_PLACEHOLDER}}'
+if 'VERSION_PLACEHOLDER' in VERSION:
+    VERSION = '0.0.0'
+
 setup(
     name='valvesmd',
     packages=['valvesmd'],
-    version='1.0.0',
+    version=VERSION,
+    description='A library to parse .smd files (uncompiled 3D asset files for the Source engine).',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     license='gpl-3.0',
-    description='A library to parse .smd files used in the source engine.',
     author='Maxime Dupuis',
     author_email='mdupuis@hotmail.ca',
     url='https://github.com/pySourceSDK/ValveSMD',
-    download_url='https://github.com/pySourceSDK/ValveSMD/archive/v1.0.0.tar.gz',
     keywords=['smd', 'source', 'sourcesdk', 'hammer', 'valve'],
     install_requires=['pyparsing', 'future'],
     classifiers=[
@@ -16,12 +27,12 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Operating System :: Unix',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Microsoft :: Windows'
     ],
 )
