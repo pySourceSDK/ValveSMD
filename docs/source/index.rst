@@ -18,7 +18,7 @@ Welcome to ValveSMD's documentation!
    :target: https://pypi.python.org/pypi/valvesmd/
 
 .. CI status
-.. image:: https://github.com/pySourceSDK/ValveSMD/actions/workflows/tests.yml/badge.svg
+.. image:: https://github.com/pySourceSDK/ValveSMD/actions/workflows/CI.yml/badge.svg
    :target: https://github.com/pySourceSDK/ValveSMD/actions
 
 .. Coverage

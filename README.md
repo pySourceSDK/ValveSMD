@@ -2,12 +2,12 @@
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/valvesmd.svg)](https://pypi.python.org/pypi/valvesmd/)
 [![Platforms](https://img.shields.io/badge/platform-Linux,_MacOS,_Windows-blue)]()
 [![PyPI version fury.io](https://badge.fury.io/py/valvesmd.svg)](https://pypi.python.org/pypi/valvesmd/)
-[![GitHub Workflow Status (with event)](https://github.com/pySourceSDK/ValveSMD/actions/workflows/tests.yml/badge.svg)]()
+[![GitHub Workflow Status (with event)](https://github.com/pySourceSDK/ValveSMD/actions/workflows/CI.yml/badge.svg)]()
 [![Test coverage](https://github.com/pySourceSDK/ValveSMD/blob/master/docs/source/coverage.svg "coverage")]()
 
 # ValveSMD
 
-ValveSMD is a Python library for parsing .smd files for the Source Engine. It provides ways to read, modify and write smd files.
+ValveSMD is a Python library designed to parse and edit .SMD files, which stores 3D mesh data to be compiled for use in Valve's Source engine.
 
 Full documentation: https://pysourcesdk.github.io/ValveSMD/
 
