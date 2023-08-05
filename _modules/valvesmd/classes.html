@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>valvesmd.classes &#8212; ValveSMD 1.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=039e1c02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=a0f8683c" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=def9ab29"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for valvesmd.classes</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">round</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">int</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">next</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">str</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">object</span>
+<span class="kn">from</span> <span class="nn">future</span> <span class="kn">import</span> <span class="n">standard_library</span>
+
+<span class="n">standard_library</span><span class="o">.</span><span class="n">install_aliases</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="SmdRoot"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdRoot">[docs]</a><span class="k">class</span> <span class="nc">SmdRoot</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SmdRoot.__init__"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdRoot.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates an empty instance of Smd.</span>
+
+<span class="sd">        :param data: Dict data to be loaded in this instance</span>
+<span class="sd">        :type data: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">#: :type: int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1">#: :type: list[SmdNode]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nodes&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="c1">#: :type: list[SmdKeyframe]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skeleton</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;skeleton&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="c1">#: :type: list[SmdTriangle]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">triangles</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;triangles&#39;</span><span class="p">,</span> <span class="p">[])</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">smd_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ret_str</span> <span class="o">=</span> <span class="s1">&#39;version &#39;</span> <span class="o">+</span> <span class="n">str_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s1">&#39;nodes</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+            <span class="n">ret_str</span> <span class="o">+=</span> <span class="n">node</span><span class="o">.</span><span class="n">smd_str</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s1">&#39;end</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s1">&#39;skeleton</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">keyf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">skeleton</span><span class="p">:</span>
+            <span class="n">ret_str</span> <span class="o">+=</span> <span class="n">keyf</span><span class="o">.</span><span class="n">smd_str</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s1">&#39;end</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s1">&#39;triangles</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">tri</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">triangles</span><span class="p">:</span>
+            <span class="n">ret_str</span> <span class="o">+=</span> <span class="n">tri</span><span class="o">.</span><span class="n">smd_str</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s1">&#39;end</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">ret_str</span></div>
+
+
+<div class="viewcode-block" id="SmdNode"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdNode">[docs]</a><span class="k">class</span> <span class="nc">SmdNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SmdNode.__init__"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdNode.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param data: Dict data to be loaded in this instance</span>
+<span class="sd">        :type data: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: :type: int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1">#: :type: str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;root&#39;</span><span class="p">)</span>
+        <span class="c1">#: :type: int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent_id</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;parent_id&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">smd_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">node_str</span> <span class="o">=</span> <span class="n">str_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">node_str</span> <span class="o">+=</span> <span class="s1">&#39; &quot;&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;&quot; &#39;</span>
+        <span class="n">node_str</span> <span class="o">+=</span> <span class="n">str_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">node_str</span></div>
+
+
+<div class="viewcode-block" id="SmdKeyframe"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdKeyframe">[docs]</a><span class="k">class</span> <span class="nc">SmdKeyframe</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SmdKeyframe.__init__"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdKeyframe.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param data: Dict data to be loaded in this instance</span>
+<span class="sd">        :type data: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: :type: int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1">#: :type: list[SmdBonePose]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poses</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;poses&#39;</span><span class="p">,</span> <span class="p">[])</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">smd_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">key_str</span> <span class="o">=</span> <span class="s1">&#39;time &#39;</span> <span class="o">+</span> <span class="n">str_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">poses</span><span class="p">:</span>
+            <span class="n">key_str</span> <span class="o">+=</span> <span class="n">p</span><span class="o">.</span><span class="n">smd_str</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">key_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SmdBonePose"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdBonePose">[docs]</a><span class="k">class</span> <span class="nc">SmdBonePose</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SmdBonePose.__init__"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdBonePose.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param data: Dict data to be loaded in this instance</span>
+<span class="sd">        :type data: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: :type: int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boneid</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;boneid&#39;</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="p">)</span>
+        <span class="c1">#: :type: tuple(float, float, float)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="c1">#: :type: tuple(float, float, float)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rotation&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">smd_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">key_str</span> <span class="o">=</span> <span class="n">str_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boneid</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">:</span>
+            <span class="n">key_str</span> <span class="o">+=</span> <span class="n">str_float</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span><span class="p">:</span>
+            <span class="n">key_str</span> <span class="o">+=</span> <span class="n">str_float</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">return</span> <span class="n">key_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SmdTriangle"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdTriangle">[docs]</a><span class="k">class</span> <span class="nc">SmdTriangle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SmdTriangle.__init__"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdTriangle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param data: Dict data to be loaded in this instance</span>
+<span class="sd">        :type data: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: :type: str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">material</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;material&#39;</span><span class="p">,</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span>
+        <span class="c1">#: :type: list[SmdVert]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verts</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verts&#39;</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">smd_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tri_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">material</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verts</span><span class="p">:</span>
+            <span class="n">tri_str</span> <span class="o">+=</span> <span class="n">v</span><span class="o">.</span><span class="n">smd_str</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">tri_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SmdVert"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdVert">[docs]</a><span class="k">class</span> <span class="nc">SmdVert</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SmdVert.__init__"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdVert.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param data: Dict data to be loaded in this instance</span>
+<span class="sd">        :type data: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: :type: int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent_boneid</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;parent_boneid&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1">#: :type: tuple(float, float, float)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="c1">#: :type: tuple(float, float, float)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normal</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="c1">#: :type: tuple(float, float)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uv</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;uv&#39;</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="c1">#: :type: list[SmdLink]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">links</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;links&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># optional</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">smd_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">vert_str</span> <span class="o">=</span> <span class="n">str_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent_boneid</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">:</span>
+            <span class="n">vert_str</span> <span class="o">+=</span> <span class="n">str_float</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="p">:</span>
+            <span class="n">vert_str</span> <span class="o">+=</span> <span class="n">str_float</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">uv</span><span class="p">:</span>
+            <span class="n">vert_str</span> <span class="o">+=</span> <span class="n">str_float</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">links</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vert_str</span> <span class="o">+=</span> <span class="n">str_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">links</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">links</span><span class="p">:</span>
+                <span class="n">vert_str</span> <span class="o">+=</span> <span class="n">l</span><span class="o">.</span><span class="n">smd_str</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">return</span> <span class="n">vert_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SmdLink"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdLink">[docs]</a><span class="k">class</span> <span class="nc">SmdLink</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SmdLink.__init__"><a class="viewcode-back" href="../../api/classes.html#valvesmd.SmdLink.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param data: Dict data to be loaded in this instance</span>
+<span class="sd">        :type data: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: :type: (int)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boneid</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;boneid&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="c1">#: :type: (float)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">smd_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">link_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boneid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">link_str</span> <span class="o">+=</span> <span class="n">str_int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boneid</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">link_str</span> <span class="o">+=</span> <span class="n">str_float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="k">return</span> <span class="n">link_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<span class="k">def</span> <span class="nf">str_int</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">str_float</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">force</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;{0:.&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">decimals</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;f}&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">decimals</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">str_int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/pysourcesdk_smd.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">ValveSMD</a></h1>
+
+
+
+<p class="blurb">A <a href="https://pysourcesdk.github.io/hub/">pySourceSDK</a> project</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api_ref.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Maxime Dupuis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
